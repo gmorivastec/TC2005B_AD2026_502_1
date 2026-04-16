@@ -1,6 +1,7 @@
 // C#
 // POO 
 // .net 
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -15,6 +16,14 @@ public class Movimiento : MonoBehaviour
     // las instancias de nuestros componentes las crea el engine
 
     private InputSystem_Actions inputActions;
+
+    // valores que funcionan como parámetros desde el editor
+    // puedo poner la variable pública 
+
+    // ¿por qué querría exponer una variable al editor?
+
+    [SerializeField]
+    private float _velocidad = 5;
 
     void Awake()
     {
@@ -72,7 +81,14 @@ public class Movimiento : MonoBehaviour
         // Time.deltaTime - el tiempo que transcurrio entre el cuadro anterior y el actual
         // en operaciones espaciales se utiliza para escalar apropiadamente
         // de manera independiente al performance
-        transform.Translate(1 * Time.deltaTime, 0, 0);
+        
+        // capturar el vector de entrada
+        // en entrada el rango está normalizado [-1, 1]
+        Vector2 movimiento = inputActions.Player.Move.ReadValue<Vector2>();
+        
+        //transform.Translate(1 * Time.deltaTime, 0, 0);
+        transform.Translate(movimiento * Time.deltaTime * _velocidad, Space.World);
+
 
         if(inputActions.Player.Jump.triggered)
         {
@@ -90,5 +106,63 @@ public class Movimiento : MonoBehaviour
     {
         // se ejecuta en intervalos pseudoregulares
         //print("FIXED UPDATE");
+    }
+
+    // colisiones
+    // es un evento que sucede cuando dos volúmenes coinciden
+    // en alguna parte en el espacio en un frame
+
+    // requisitos:
+    // 1. todos los involucrados tienen collider
+    // 2. al menos uno tiene rigidbody
+    // 3. el que tiene rigidbody se está moviendo
+
+    // rigidbody es un componente que "suscribe" a un objeto 
+    // al motor de la física
+
+    // método que se invoca cuando se detecta una colisión
+    // puede ser invocado en todos los involucrados en la misma
+    // sólo se detona en el frame en el que los objetos involucrados
+    // empezaron a colisionar
+    void OnCollisionEnter(Collision collision)
+    {
+        // recibe un objeto de tipo collision
+        // el objeto collision tiene información de la colisión
+        // velocidad, fuerza, puntos de contacto, etc
+        print("COLLISION ENTER");
+
+        // info útil para colisiones 
+        // cómo filtrar por categorías
+        print(collision.gameObject.tag);
+        print(collision.gameObject.layer);
+    }
+
+    void OnCollisionStay(Collision collision)
+    {
+        print("COLLISION STAY");
+    }
+
+    void OnCollisionExit(Collision collision)
+    {
+        print("COLLISION EXIT");
+    }
+
+    // si me interesa verificar una colisión
+    // pero no me interesa una reacción física 
+    // puedo usar triggers
+
+    void OnTriggerEnter(Collider other)
+    {
+        print("TRIGGER ENTER");
+    }
+
+    void OnTriggerStay(Collider other)
+    {
+        print("TRIGGER STAY");
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        print("TRIGGER EXIT");
     }
 }
