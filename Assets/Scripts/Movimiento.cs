@@ -1,9 +1,11 @@
 // C#
 // POO 
 // .net 
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+
 
 public class Movimiento : MonoBehaviour
 {
@@ -25,6 +27,9 @@ public class Movimiento : MonoBehaviour
     [SerializeField]
     private float _velocidad = 5;
 
+    [SerializeField]
+    private TMP_Text _textito;
+    
     void Awake()
     {
         
@@ -154,6 +159,7 @@ public class Movimiento : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         print("TRIGGER ENTER");
+        _textito.text = "TRIGGER ENTER";
     }
 
     void OnTriggerStay(Collider other)
