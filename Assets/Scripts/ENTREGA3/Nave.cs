@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class Nave : MonoBehaviour
 {
@@ -9,9 +10,16 @@ public class Nave : MonoBehaviour
     [SerializeField]
     private float _velocidad = 5;
 
+    // creación dinámica de objetos
+    // cuando creamos nuevos objetos en Unity generalmente clonamos un objeto predefinido
+    // necesitamos un original
+    [SerializeField]
+    private GameObject _original;
+
     void Awake()
     {
         inputActions = new InputSystem_Actions();
+        Assert.IsNotNull(_original, "ORIGINAL ES NULO EN NAVE, VERIFICAR.");
     }
 
     void OnEnable()
@@ -41,6 +49,11 @@ public class Nave : MonoBehaviour
         if(inputActions.Player.Jump.triggered)
         {
             print("PEW PEW!");
+            Instantiate(
+                _original,
+                transform.position,
+                transform.rotation
+            );
         }
     }
 }
