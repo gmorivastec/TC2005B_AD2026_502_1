@@ -28,4 +28,9 @@ public class Proyectil : MonoBehaviour
         transform.Translate(_velocidad * Time.deltaTime, 0, 0);
 
     }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        Destroy(gameObject);       
+    }
 }
