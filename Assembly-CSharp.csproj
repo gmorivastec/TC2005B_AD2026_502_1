@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets/Scripts/ENTREGA3/GameManager.cs" />
+    <Compile Include="Assets/Scripts/ENTREGA3/ProyectilPool.cs" />
     <Compile Include="Assets/Scripts/ENTREGA2/Movimiento.cs" />
     <Compile Include="Assets/InputSystem_Actions.cs" />
     <Compile Include="Assets/Scripts/ENTREGA3/Nave.cs" />

@@ -406,6 +406,7 @@
 "Assets/Scripts/ENTREGA3/GameManager.cs"
 "Assets/Scripts/ENTREGA3/Nave.cs"
 "Assets/Scripts/ENTREGA3/Proyectil.cs"
+"Assets/Scripts/ENTREGA3/ProyectilPool.cs"
 -langversion:9.0
 /deterministic
 /optimize+

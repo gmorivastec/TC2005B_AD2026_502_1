@@ -31,6 +31,17 @@ public class Proyectil : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
+        // avisar que otro proyectil va a ser destruido
+        // es necesario buscar al GameManager
+        // GameObject.Find(); - es relativamente lento
+        // Complejidad mínimo O(logN)
+
+        // acceso - ??
+        // O(1)
+        GameManager.Instance.AgregarProyectilDestruido();
+        
+
+        // destruir el gameobject
         Destroy(gameObject);       
     }
 }

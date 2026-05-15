@@ -576,6 +576,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ad20a3d94a571df29dcb7dd6d2eb2d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  _proyectilesDestruidos: 0
 --- !u!4 &2093177469
 Transform:
   m_ObjectHideFlags: 0
